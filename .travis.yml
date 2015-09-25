@@ -9,6 +9,7 @@ deploy:
   app: stormy-coast-7155
   on:
     repo: ShigeruIchinoki/icinoki
+    branch: master
 
 
 
