@@ -1,0 +1,20 @@
+language: ruby
+rvm:
+- 2.2.2
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: kF2aFlT3k9xVJXn99tyjNOGCrWKVehlXvQgGG+/kVjOlZ1BsgfuAL93oBP0I9ppRr6iITmVmqxdl2eFwVy5mZbuw0Y/c4jWvOqe9rMZOS10QpJcQC2r3agk3r5XvhYO13KGwoUT/ksE5+BQiaUkG4+ke0SwLzkT8hJxDwW39L6zL8632N6pec0e/S4hMgngX/ZRdK4IBvBskcQiRpUa11Be2fNL1KGhgVaVNrtojUG5/LntormXoALFj2uo5yPQsnGsU+0fqTHK6C6QJl9n8ybsFvSg786iyrDHAOT7fTlioq7xIFSp2sIz5X3W9To6jicAjSy+oyknaFIDv03zK5hpV91RR1DnhLF5BKX1TM4exSGdLadbexaYZ1huaE1hdf/QOQ+ciGVJUugCMuWefwL8PFf66hMYUXp83EslizcRPdJ77Lz+c8DJIuechCvbZqmHpofoMUJoAB6vpXL6fv2zrzHJ0dwRc8ONuGSB0X0G3ZKHc1M/aLkRmkrH9J7JlBGELyW+PpCWPQJi4VclIMHyMHH0iOKsE1RQN91v3amlZH0nnSrMH1x2fFbgY1xnyVKB+uBdr2PTJ423u31HPmtq570Mo37tUKpkwTNSZdTIlmG68x3cbS6/wdmxICmyvgQIZhbJT9rcm9iTwpRri/dq6J92xTcuXa4IisRNJ1ts=
+  app: stormy-coast-7155
+  on:
+    repo: ShigeruIchinoki/icinoki
+
+
+
+addons:
+  postgresql: "9.3"
+before_script:
+- psql -c 'create database travis_ci_test;' -U postgres 
+- cp config/database.yml.travis config/database.yml
+- rake db:migrate RAILS_ENV=test # いらない?
